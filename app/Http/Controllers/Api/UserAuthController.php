@@ -15,7 +15,7 @@ class UserAuthController extends Controller
         $user = User::create([
             'name' => $request->name,
             'phone_number' => $request->phone_number,
-            'ip_address' => $request->ip(),
+            'ip_address' => $request->ip_address ?? $request->ip(),
             'is_active' => false,
         ]);
 

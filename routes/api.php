@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\DataExportController;
 use App\Http\Controllers\Api\MedicalController;
 use App\Http\Controllers\Api\SettingsController as ApiSettingsController;
 use App\Http\Controllers\Api\UserAuthController;
@@ -24,8 +25,10 @@ Route::middleware(['changeLanguage'])->group(function () {
 
     Route::get('settings', [ApiSettingsController::class, 'settings']);
 
+
     Route::prefix('medicins')->group(function () {
         Route::middleware('checkActiveUser')->group(function () {
+            Route::get('export-medicals', [DataExportController::class, 'export']);
             Route::get('/', [MedicalController::class, 'index']);
             Route::get('/{medical}', [MedicalController::class, 'show']);
         });
