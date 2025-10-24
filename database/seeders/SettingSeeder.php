@@ -12,7 +12,7 @@ class SettingSeeder extends Seeder
         Setting::updateOrCreate(
             ['id' => 1], // always keep single settings row
             [
-                'website_name' => 'موقع طبي',
+                'website_name' => 'Medi Lite',
                 'website_name_en' => 'Medical Website',
                 'subscription_title' => 'اشترك الآن معنا',
                 'phone' => '+966500000000',
@@ -20,7 +20,7 @@ class SettingSeeder extends Seeder
                 'facebook' => 'https://facebook.com',
                 'twitter' => 'https://twitter.com',
                 'description' => 'وصف الموقع الطبي... يمكن تغييره من لوحة التحكم',
-                'address' => 'الرياض - السعودية',
+                'address' => 'سوريا',
                 'email' => 'info@example.com',
                 'google_play' => null,
                 'apple_store' => null,

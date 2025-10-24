@@ -21,7 +21,9 @@ class MedicalController extends Controller
                 $qBuilder->where('name_ar', 'LIKE', "%$q%")
                     ->orWhere('name_en', 'LIKE', "%$q%")
                     ->orWhere('company', 'LIKE', "%$q%")
-                    ->orWhere('composistion', 'LIKE', "%$q%");
+                    ->orWhere('strength', 'LIKE', "%$q%")
+                    ->orWhere('indication', 'LIKE', "%$q%");
+
             });
         }
 
@@ -37,7 +39,9 @@ class MedicalController extends Controller
             'file' => 'required|mimes:xlsx,xls'
         ]);
 
-        Excel::import(new MedicalsImport, $request->file('file'));
+        // Excel::import(new MedicalsImport, $request->file('file'));
+        Excel::queueImport(new MedicalsImport(), $request->file('file'));
+
 
         return back()->with('success', 'تم رفع بيانات الأدوية بنجاح ✅');
     }

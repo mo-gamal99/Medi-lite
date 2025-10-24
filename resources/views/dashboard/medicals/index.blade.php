@@ -38,9 +38,9 @@
     </form>
 
     {{-- تنبيه --}}
-    @if(session('success'))
+    {{-- @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
+    @endif --}}
 
     {{-- جدول الأدوية --}}
     <table class="table table-bordered table-striped">
@@ -51,7 +51,7 @@
                 <th>الاسم الإنجليزي</th>
                 <th>الشركة</th>
                 <th>التركيب</th>
-                <th>السعر العام</th>
+                <th>الإستطباب</th>
                 <th>تحكم</th>
             </tr>
         </thead>
@@ -62,8 +62,8 @@
                     <td>{{ $m->name_ar }}</td>
                     <td>{{ $m->name_en }}</td>
                     <td>{{ $m->company }}</td>
-                    <td>{{ $m->composistion }}</td>
-                    <td>{{ $m->public }}</td>
+                    <td>{{ $m->strength }}</td>
+                    <td>{{ $m->indication }}</td>
                     <td>
                         <a href="{{ route('medicals.edit', $m) }}" class="btn btn-sm btn-info">تعديل</a>
                     </td>
