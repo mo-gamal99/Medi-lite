@@ -1,10 +1,10 @@
 @extends('dashboard.index')
-@section('title', 'تصنيفات المنتجات')
+@section('title', 'تصنيفات الادوية')
 
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item"><a href="{{route('products_settings.index')}}">خيارات المنتجات</a></li>
-    <li class="breadcrumb-item active" aria-current="page">تصنيفات المنتجات</li>
+    <li class="breadcrumb-item"><a href="{{ route('products_settings.index') }}">خيارات الادوية</a></li>
+    <li class="breadcrumb-item active" aria-current="page">تصنيفات الادوية</li>
 @endsection
 
 @section('section')
@@ -16,8 +16,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <x-alert type='success'/>
-                        <x-alert type='dark'/>
+                        <x-alert type='success' />
+                        <x-alert type='dark' />
                         <h4 class="card-title" style="font-family: Noto Kufi Arabic">التصنيفات</h4>
                         <div data-repeater-list="group-a">
                             <div class="row" data-repeater-item>
@@ -25,13 +25,10 @@
                                 @forelse ($productFilter->subSettings as $setting)
                                     <div class="mb-3 col-lg-2">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox"
-                                                   value="{{ $setting->id }}" name="filters[]"
-                                                   id="setting_{{$setting->id}}"
-                                                   id="invalidCheck1"
-                                                   checked>
-                                            <label class="form-check-label fw-bold"
-                                                   for="setting_{{$setting->id}}">
+                                            <input class="form-check-input" type="checkbox" value="{{ $setting->id }}"
+                                                name="filters[]" id="setting_{{ $setting->id }}" id="invalidCheck1"
+                                                checked>
+                                            <label class="form-check-label fw-bold" for="setting_{{ $setting->id }}">
                                                 {{ $setting->name }}
                                             </label>
 
@@ -61,11 +58,9 @@
                                     @if (!$productFilter->subSettings->contains('id', $setting->id))
                                         <div class="mb-3 col-lg-2">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox"
-                                                       value="{{ $setting->id }}" name="filters[]"
-                                                       id="setting_{{$setting->id}}">
-                                                <label class="form-check-label fw-bold"
-                                                       for="setting_{{$setting->id}}">
+                                                <input class="form-check-input" type="checkbox" value="{{ $setting->id }}"
+                                                    name="filters[]" id="setting_{{ $setting->id }}">
+                                                <label class="form-check-label fw-bold" for="setting_{{ $setting->id }}">
                                                     {{ $setting->name }}
                                                 </label>
                                             </div>

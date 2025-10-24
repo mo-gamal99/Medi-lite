@@ -1,9 +1,9 @@
 @extends('dashboard.index')
-@section('title', 'المنتجات')
+@section('title', 'الادوية')
 
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item">المنتجات</li>
+    <li class="breadcrumb-item">الادوية</li>
     <li class="breadcrumb-item">منتجات قاربت علي النفاذ</li>
 @endsection
 
@@ -46,12 +46,12 @@
 
                                             <td data-field="name">{{ $product->quantity }}</td>
                                             {{-- @can('product.edit') --}}
-                                                <td style="width: 5%;">
-                                                    <a href="{{ route('products.edit', $product->id) }}"
-                                                        class="btn btn-primary waves-effect waves-light" title="تعديل">
-                                                        <i class="fas fa-pencil-alt"></i>
-                                                    </a>
-                                                </td>
+                                            <td style="width: 5%;">
+                                                <a href="{{ route('products.edit', $product->id) }}"
+                                                    class="btn btn-primary waves-effect waves-light" title="تعديل">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </a>
+                                            </td>
                                             {{-- @endcan --}}
                                         @empty
                                             <td colspan="6">

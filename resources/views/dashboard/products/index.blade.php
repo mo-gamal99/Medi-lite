@@ -1,9 +1,9 @@
 @extends('dashboard.index')
-@section('title', 'المنتجات')
+@section('title', 'الادوية')
 
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item">المنتجات</li>
+    <li class="breadcrumb-item">الادوية</li>
 @endsection
 
 @section('section')

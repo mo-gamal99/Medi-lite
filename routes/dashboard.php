@@ -49,7 +49,7 @@ use Illuminate\Support\Facades\Route;
 // Route::post('/login', [AdminsController::class, 'login'])->name('admin.login.post');
 // Handle logout
 
-Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
+Route::group(['prefix' => 'admin_cp_pro', 'middleware' => 'admin'], function () {
 
     Route::post('/logout', [AdminsController::class, 'logout'])->name('admin.logout');
 
@@ -148,6 +148,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     //----------------------------------------------/Clients routes
     Route::put('/clients/{id}/update_pass', [ClientsController::class, 'updatePassword'])->name('client.update_password');
     Route::resource('/clients', ClientsController::class);
+    Route::post('/clients/{id}/toggle-activation', [ClientsController::class, 'toggleActivation'])->name('clients.toggle');
 
     //----------------------------------------------/Admins Rules routes
     Route::resource('/rules', RulesController::class);

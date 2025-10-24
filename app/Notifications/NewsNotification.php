@@ -9,54 +9,54 @@ use Illuminate\Notifications\Notification;
 
 class NewsNotification extends Notification
 {
-    use Queueable;
+  use Queueable;
 
-    public $title;
-    public $body;
-    public $user;
+  public $title;
+  public $body;
+  public $user;
 
-    /**
-     * Create a new notification instance.
-     */
-    public function __construct($title, $body, $user)
-    {
-        $this->title = $title;
-        $this->body = $body;
-        $this->user = $user;
-    }
+  /**
+   * Create a new notification instance.
+   */
+  public function __construct($title, $body, $user)
+  {
+    $this->title = $title;
+    $this->body = $body;
+    $this->user = $user;
+  }
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @return array<int, string>
-     */
-    public function via(object $notifiable): array
-    {
-        return ['mail'];
-    }
+  /**
+   * Get the notification's delivery channels.
+   *
+   * @return array<int, string>
+   */
+  public function via(object $notifiable): array
+  {
+    return ['mail'];
+  }
 
-    /**
-     * Get the mail representation of the notification.
-     */
-    public function toMail(object $notifiable): MailMessage
-    {
-        $user = $this->user;
-        return (new MailMessage)
-            ->subject($this->title)
-            ->with($this->body)
-            ->action('مشاهدة المنتجات', url('/'))
-            ->line('نشكرك لزيارة متجرنا');
-    }
+  /**
+   * Get the mail representation of the notification.
+   */
+  public function toMail(object $notifiable): MailMessage
+  {
+    $user = $this->user;
+    return (new MailMessage)
+      ->subject($this->title)
+      ->with($this->body)
+      ->action('مشاهدة الادوية', url('/'))
+      ->line('نشكرك لزيارة متجرنا');
+  }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @return array<string, mixed>
-     */
-    public function toArray(object $notifiable): array
-    {
-        return [
-            //
-        ];
-    }
+  /**
+   * Get the array representation of the notification.
+   *
+   * @return array<string, mixed>
+   */
+  public function toArray(object $notifiable): array
+  {
+    return [
+      //
+    ];
+  }
 }

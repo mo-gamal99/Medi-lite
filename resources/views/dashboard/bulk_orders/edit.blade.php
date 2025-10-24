@@ -35,7 +35,7 @@
                                     value="{{ $order->company_name }}" required>
                             </div>
                             <div class="form-group my-3">
-                                <label for="description">انواع المنتجات المطلوبة	</label>
+                                <label for="description">انواع الادوية المطلوبة </label>
                                 <textarea class="form-control" id="description" name="description" rows="3" required>{{ $order->description }}</textarea>
                             </div>
                             <button type="submit" class="btn btn-success">تعديل</button>

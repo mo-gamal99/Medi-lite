@@ -21,7 +21,8 @@
                         <div class="row mb-3">
                             <label for="example-text-input" class="col-sm-2 col-form-label">اسم المجموعة</label>
                             <div class="col-sm-10">
-                                <x-form.input name="name" type="text" value="{{$rule->name}}" id="example-text-input" />
+                                <x-form.input name="name" type="text" value="{{ $rule->name }}"
+                                    id="example-text-input" />
 
                                 {{-- <input class="form-control" name="name" type="text" id="example-text-input"
                                        value="{{$rule->name}}">
@@ -52,7 +53,7 @@
                 <label class="form-check-label fw-bold" for="selectAllCheckbox">تحديد الكل</label>
             </div>
 
-            <x-admin.rules rules_type="products" title="المنتجات" :rule_abilities="$rule_abilities" />
+            <x-admin.rules rules_type="products" title="الادوية" :rule_abilities="$rule_abilities" />
             <x-admin.rules rules_type="categories" title="الأقسام" :rule_abilities="$rule_abilities" />
             <x-admin.rules rules_type="filters" title="التصنيفات" :rule_abilities="$rule_abilities" />
             <x-admin.rules rules_type="companies" title="الشركات" :rule_abilities="$rule_abilities" />

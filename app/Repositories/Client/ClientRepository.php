@@ -19,7 +19,7 @@ class ClientRepository implements ClientInterface
 
   public function getMainClient()
   {
-    return $this->client->with('addresses.country')->latest()->paginate();
+    return $this->client->latest()->paginate();
   }
 
   public function updatePassword($data, $id)
@@ -36,7 +36,17 @@ class ClientRepository implements ClientInterface
     return $client->wasChanged();
   }
 
-  public function delete($id)
+    public function toggleActivation($id)
+    {
+        $client = $this->client->findOrFail($id);
+        $client->is_active = !$client->is_active;
+        $client->save();
+
+        return $client;
+    }
+
+
+    public function delete($id)
   {
     $client = User::findOrFail($id);
     $client->delete();

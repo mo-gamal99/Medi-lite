@@ -16,17 +16,10 @@ class SettingResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'website_name' => $this->getCurrentNameLangAttribute(),
+            'app_name' => $this->getCurrentNameLangAttribute(),
             'subscription_title' => $this->subscription_title,
             'address' => $this->address,
             'email' => $this->email,
-            'facebook' => $this->facebook,
-            'twitter' => $this->twitter,
-            'instagram' => $this->instagram,
-            'snap' => $this->snap,
-            'tiktok' => $this->tiktok,
-            'tax_number' => $this->tax_number,
-            'value_added_tax' => $this->value_added_tax,
             'image' => asset('storage/' . $this->image),
             'logo' => asset('storage/' . $this->logo),
         ];

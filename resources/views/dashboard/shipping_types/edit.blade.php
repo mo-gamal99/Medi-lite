@@ -20,7 +20,7 @@
 
                         <ul class="message-list" style="list-style-type: none">
 
-                            <h5>تفعيل امكانية الاستلام من المتجر</h5>
+                            <h5>تفعيل امكانية الاستلام من التطبيق</h5>
                             <li class="mb-5">
                                 <div class="col-mail col-mail-1">
                                     <div class="checkbox-wrapper-mail">
@@ -28,7 +28,7 @@
                                             {{ $shippingData->add_pickup_from_store == true ? 'checked' : '' }}>
                                         <label for="chk1" class="toggle"></label>
                                     </div>
-                                    <span class="fw-bold">الاستلام من المتجر</span>
+                                    <span class="fw-bold">الاستلام من التطبيق</span>
                                 </div>
                             </li>
 
@@ -243,11 +243,11 @@
     @push('scripts')
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="{{ asset('assets/js/shipping_type_blade.js') }}"></script>
-        
+
         <script src="{{ asset('assets/libs/jquery.repeater/jquery.repeater.min.js') }}"></script>
-        
+
         <script src="{{ asset('assets/js/pages/form-repeater.int.js') }}"></script>
-        
+
     @endpush
 
 @endsection

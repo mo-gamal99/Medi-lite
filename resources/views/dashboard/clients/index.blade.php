@@ -7,61 +7,58 @@
 @endsection
 
 @section('section')
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
 
-                    <x-alert type='success'/>
-                    <x-alert type='dark'/>
-                    <x-alert type='danger'/>
+                <x-alert type='success'/>
+                <x-alert type='dark'/>
+                <x-alert type='danger'/>
 
-                    <div class="table-responsive mt-2">
-
-                        <table
-                            class="table table-editable table-nowrap align-middle table-edits table-striped table-bordered mt-2"
-                            id="product-table">
-                            <thead>
-
+                <div class="table-responsive mt-2">
+                    <table class="table table-striped table-bordered mt-2" id="product-table">
+                        <thead>
                             <tr>
                                 <th>اسم العميل</th>
                                 <th>رقم الهاتف</th>
-                                <th>البريد الالكتروني</th>
-                                <th>تاريخ الانشاء</th>
+                                <th>الحالة</th>
+                                <th>تحكم</th>
                             </tr>
+                        </thead>
 
-                            </thead>
-
-
-                            <tbody>
+                        <tbody>
                             @forelse ($clients as $client)
-                                <tr data-id="5">
-
-                                    <td data-field="name">{{ $client->first_name . ' ' . $client->family_name }}</td>
-                                    <td data-field="phone_number">{{$client->phone_number }}
-                                        {{$client->addresses->first()->country->phone_code ?? '' }}+
+                                <tr>
+                                    <td>{{ $client->name }}</td>
+                                    <td>{{ $client->phone_number }}</td>
+                                    <td>
+                                        @if ($client->is_active)
+                                            <span class="badge bg-success">مفعل</span>
+                                        @else
+                                            <span class="badge bg-danger">غير مفعل</span>
+                                        @endif
                                     </td>
-                                    <td data-field="email">{{ $client->email }}</td>
-                                    <td data-field="gender">{{ $client->created_at->format('Y-m-d H:i') }}</td>
-
-
-                                    @empty
-                                        <td colspan="6">
-                                            لا يوجد عملاء لعرضهم
-                                        </td>
+                                    <td>
+                                        <form action="{{ route('clients.toggle', $client->id) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm {{ $client->is_active ? 'btn-danger' : 'btn-success' }}">
+                                                {{ $client->is_active ? 'إلغاء التفعيل' : 'تفعيل' }}
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="text-center">لا يوجد عملاء لعرضهم</td>
                                 </tr>
                             @endforelse
-                            </tbody>
-
-                            <!-- end tbody -->
-                        </table>
-                        <!-- end table -->
-                        {{ $clients->withQueryString()->links() }}
-                    </div>
-                    <!-- end -->
+                        </tbody>
+                    </table>
+                    {{ $clients->withQueryString()->links() }}
                 </div>
             </div>
-        </div> <!-- end col -->
+        </div>
     </div>
-
+</div>
 @endsection

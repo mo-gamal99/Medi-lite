@@ -16,10 +16,10 @@
                     <x-alert type='success' />
                     <x-alert type='dark' />
                     {{-- @can('product.trash.view') --}}
-                        <div class="button-items text-end">
-                            <a href="{{ route('products.trash') }}"
-                                class="btn btn-dark waves-effect waves-light mb-5">المحذوفات</a>
-                        </div>
+                    <div class="button-items text-end">
+                        <a href="{{ route('products.trash') }}"
+                            class="btn btn-dark waves-effect waves-light mb-5">المحذوفات</a>
+                    </div>
                     {{-- @endcan --}}
 
                     <x-form.search-form :categories="$categories" :products="$products" />
@@ -29,12 +29,12 @@
                         @method('delete')
 
                         {{-- @can('product.delete') --}}
-                            <td style="width: 7%;">
-                                <button class="btn btn-danger waves-effect waves-light" title="حذف" type="button"
-                                    onclick="confirmDelete_()">
-                                    حذف المنتجات
-                                </button>
-                            </td>
+                        <td style="width: 7%;">
+                            <button class="btn btn-danger waves-effect waves-light" title="حذف" type="button"
+                                onclick="confirmDelete_()">
+                                حذف الادوية
+                            </button>
+                        </td>
                         {{-- @endcan --}}
 
                         <div class="table-responsive mt-2">
@@ -85,21 +85,21 @@
                                             </td>
 
                                             {{-- @can('product_setting.filters') --}}
-                                                <td style="width: 2%">
-                                                    <a href="{{ route('products.filters', $product->id) }}"
-                                                        class="btn btn-info btn-sm edit" title="تعديل">
-                                                        التصنيفات
-                                                    </a>
-                                                </td>
+                                            <td style="width: 2%">
+                                                <a href="{{ route('products.filters', $product->id) }}"
+                                                    class="btn btn-info btn-sm edit" title="تعديل">
+                                                    التصنيفات
+                                                </a>
+                                            </td>
                                             {{-- @endcan --}}
 
                                             {{-- @can('product.edit') --}}
-                                                <td style="width: 2%">
-                                                    <a href="{{ route('products.edit', $product->id) }}"
-                                                        class="btn btn-secondary btn-sm edit" title="تعديل">
-                                                        <i class="fas fa-pencil-alt"></i>
-                                                    </a>
-                                                </td>
+                                            <td style="width: 2%">
+                                                <a href="{{ route('products.edit', $product->id) }}"
+                                                    class="btn btn-secondary btn-sm edit" title="تعديل">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </a>
+                                            </td>
                                             {{-- @endcan --}}
 
                                         @empty

@@ -4,7 +4,7 @@
 
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item"><a href="{{ route('products.index') }}">المنتجات</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('products.index') }}">الادوية</a></li>
     <li class="breadcrumb-item">انشاء منتج</li>
 @endsection
 

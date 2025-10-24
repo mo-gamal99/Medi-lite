@@ -27,7 +27,7 @@ class MedicalController extends Controller
             });
         }
 
-        $medicals = $query->orderByDesc('id')->paginate(25);
+        $medicals = $query->orderByDesc('id')->paginate(25)->appends(['q' => $request->q]);
 
         return view('dashboard.medicals.index', compact('medicals'));
     }
