@@ -28,13 +28,8 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'string', 'unique:users,email'],
-            'password' => ['required', 'confirmed', Password::defaults()],
-            'family_name' => ['required', 'string', 'max:255'],
-            'phone_number' => 'required|unique:users',
-            'address' => ['required', 'string', 'max:255'],
-            'city_id' => ['required', 'exists:cities,id'],
+            'name' => ['required', 'string', 'max:255'],
+            'phone_number' => ['required', 'string', 'unique:users,phone_number'],
         ];
     }
 

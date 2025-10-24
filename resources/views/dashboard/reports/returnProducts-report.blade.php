@@ -33,7 +33,7 @@
 
                 <thead>
                     <tr>
-                        <th class="fw-bold">المنتجات المرتجعة</th>
+                        <th class="fw-bold">الادوية المرتجعة</th>
                         <th class="fw-bold">عدد مرات الارجاع</th>
                         <th class="fw-bold">تاريخ ارجاع الطلب</th>
                     </tr>
@@ -42,10 +42,10 @@
                 <tbody>
                     @forelse ($orders as $order)
                         <tr data-id="5">
-                     {{-- <td>{{ $order['product']->id }}</td> --}}
-                        <td>{{ $order['product']->name }}</td>
-                        <td>{{ $order['total_returned'] }}</td>
-                        <td>{{ $order['product']->created_at }}</td>
+                            {{-- <td>{{ $order['product']->id }}</td> --}}
+                            <td>{{ $order['product']->name }}</td>
+                            <td>{{ $order['total_returned'] }}</td>
+                            <td>{{ $order['product']->created_at }}</td>
                         @empty
                             <td colspan="10">
                                 لا يوجد طلبات لارجاعها

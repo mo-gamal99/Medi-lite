@@ -4,7 +4,7 @@
 
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item"><a href="{{ route('products.index') }}">المنتجات</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('products.index') }}">الادوية</a></li>
     <li class="breadcrumb-item">المحذوفات</li>
 @endsection
 
@@ -19,7 +19,7 @@
                     <div class="button-items text-end">
                         <a href="{{ route('products.index') }}" class="btn btn-primary waves-effect waves-light">الرجوع
                             لصفحة
-                            المنتجات</a>
+                            الادوية</a>
                     </div>
 
 
@@ -51,27 +51,27 @@
                                         <td data-field="name">{{ $product->parent->name ?? '-' }}</td>
                                         <td data-field="gender">{{ $product->deleted_at->format('Y-m-d H:i') }}</td>
                                         {{-- @can('product.restore') --}}
-                                            <form method="post" action="{{ route('products.restore', $product->id) }}">
-                                                @csrf
-                                                @method('put')
-                                                <td>
-                                                    <button type="submit" class="btn btn-primary waves-effect waves-light"
-                                                        title="تعديل">ارجاع
-                                                        المنتج</i>
-                                                    </button>
-                                                </td>
-                                            </form>
+                                        <form method="post" action="{{ route('products.restore', $product->id) }}">
+                                            @csrf
+                                            @method('put')
+                                            <td>
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light"
+                                                    title="تعديل">ارجاع
+                                                    المنتج</i>
+                                                </button>
+                                            </td>
+                                        </form>
                                         {{-- @endcan --}}
                                         {{-- @can('product.delete.forever') --}}
-                                            <form method="post" action="{{ route('products.force-delete', $product->id) }}">
-                                                <td>
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button class="btn btn-danger waves-effect waves-light" title="حذف"
-                                                        type="submit">حذف المنتج
-                                                    </button>
-                                                </td>
-                                            </form>
+                                        <form method="post" action="{{ route('products.force-delete', $product->id) }}">
+                                            <td>
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-danger waves-effect waves-light" title="حذف"
+                                                    type="submit">حذف المنتج
+                                                </button>
+                                            </td>
+                                        </form>
                                         {{-- @endcan --}}
                                     @empty
                                         <td colspan="8">

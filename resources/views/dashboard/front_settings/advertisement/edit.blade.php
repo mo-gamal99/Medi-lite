@@ -1,6 +1,6 @@
 @extends('dashboard.index')
 
-@section('title', 'تعديل الشريط المتجرك')
+@section('title', 'تعديل الشريط التطبيقك')
 
 @section('breadcrumb')
     @parent
@@ -27,14 +27,14 @@
                                 <x-form.input type="text" name="title" required value="{{ $advertisement->title }}"
                                     id="example-text-input" />
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="title_en">العنوان بالانجليزي</label>
                                 <x-form.input type="text" name="title_en" value="{{ $advertisement->title_en }}"
                                     id="example-text-input" />
                             </div>
 
-                            
+
                             <div class="form-group form-check my-3">
                                 <input type="checkbox" name="is_active" class="form-check-input" id="is_active"
                                     {{ $advertisement->is_active ? 'checked' : '' }}>

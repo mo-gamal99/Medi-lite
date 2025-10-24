@@ -151,7 +151,7 @@
                             <div class="feed-item-list">
                                 <span class="date">تكلفة الشحن</span>
                                 <span
-                                    class="activity-text fw-bold">{{ $order->shipping_price ?? 'الاستلام من المتجر' }}</span>
+                                    class="activity-text fw-bold">{{ $order->shipping_price ?? 'الاستلام من التطبيق' }}</span>
                             </div>
                         </li>
 

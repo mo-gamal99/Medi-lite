@@ -96,7 +96,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="tab" href="#profile2" role="tab">
-                    <span class="d-none d-md-block">تقارير عن سلة المنتجات</span><span class="d-block d-md-none"><i
+                    <span class="d-none d-md-block">تقارير عن سلة الادوية</span><span class="d-block d-md-none"><i
                             class="mdi mdi-account h5"></i></span>
                 </a>
             </li>
@@ -171,11 +171,11 @@
             </div>
 
 
-            {{-- تقارير عن سلة المنتجات --}}
+            {{-- تقارير عن سلة الادوية --}}
             <div class="tab-pane  p-3" id="profile2" role="tabpanel">
                 <div class="row">
                     <div class="col-12">
-                        تقارير سلة المنتجات
+                        تقارير سلة الادوية
 
                         <table id="datatable" class="table table-bordered dt-responsive nowrap"
                             style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -199,12 +199,12 @@
 
 
                                             {{-- @can('product.edit') --}}
-                                                <td style="width: 5%;">
-                                                    <a href="{{ route('products.edit', $product->id) }}"
-                                                        class="btn btn-primary waves-effect waves-light" title="مشاهدة">
-                                                        <i class="fas fa-eye"></i>
-                                                    </a>
-                                                </td>
+                                            <td style="width: 5%;">
+                                                <a href="{{ route('products.edit', $product->id) }}"
+                                                    class="btn btn-primary waves-effect waves-light" title="مشاهدة">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                            </td>
                                             {{-- @endcan --}}
                                         @empty
                                             <td colspan="6">

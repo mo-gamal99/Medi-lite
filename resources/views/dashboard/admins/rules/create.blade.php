@@ -37,7 +37,7 @@
             <label class="form-check-label fw-bold" for="selectAllCheckbox">تحديد الكل</label>
         </div>
 
-        <x-admin.rules rules_type="products" title="المنتجات" />
+        <x-admin.rules rules_type="products" title="الادوية" />
         <x-admin.rules rules_type="categories" title="الأقسام" />
         <x-admin.rules rules_type="filters" title="التصنيفات" />
         <x-admin.rules rules_type="companies" title="الشركات" />

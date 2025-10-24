@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
 
         'changeLanguage' => \App\Http\Middleware\changeLanguage::class,
         'is_user_verified' => \App\Http\Middleware\CheckUserVerification::class,
+        'checkActiveUser' => \App\Http\Middleware\CheckActiveUser::class,
 
     ];
 }

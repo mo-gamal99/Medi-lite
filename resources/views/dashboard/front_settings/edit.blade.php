@@ -29,25 +29,16 @@
 
                     <x-alert type='dark' />
                     <div class="card-body">
-                        {{-- Form Start --}}
-
-                        {{-- <div class="row mb-3">
-                            <label for="example-text-input" class="col-sm-2 col-form-label fw-bold">نبذه عن
-                                                                                                    المنتجات</label>
-                            <div class="col-sm-10">
-                                <x-form.input type="text" name="title" :value="$setting->title"/>
-                            </div>
-                        </div> --}}
 
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label fw-bold">اسم المتجر</label>
+                            <label class="col-sm-2 col-form-label fw-bold">اسم التطبيق</label>
                             <div class="col-sm-10">
                                 <x-form.input type="text" name="website_name" :value="$setting->website_name" />
                             </div>
                         </div>
 
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label fw-bold">اسم المتجر بالانجليزي</label>
+                            <label class="col-sm-2 col-form-label fw-bold">اسم التطبيق بالانجليزي</label>
                             <div class="col-sm-10">
                                 <x-form.input type="text" name="website_name_en" :value="$setting->website_name_en" />
                             </div>
@@ -75,7 +66,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="example-text-input" class="col-sm-2 col-form-label fw-bold">عنوان المتجر</label>
+                            <label for="example-text-input" class="col-sm-2 col-form-label fw-bold">عنوان التطبيق</label>
                             <div class="col-sm-10">
                                 <x-form.input type="text" name="address" :value="$setting->address" />
                             </div>
@@ -89,117 +80,16 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <label for="example-text-input" class="col-sm-2 col-form-label fw-bold">ضريبة القيمة
-                                المضافة</label>
-                            <div class="col-sm-10">
-                                <x-form.input type="text" name="value_added_tax" :value="$setting->value_added_tax" />
-                            </div>
-                        </div>
-
-
-                        <div class="row mb-3">
-                            <label for="example-text-input" class="col-sm-2 col-form-label fw-bold">رابط
-                                جوجل بلاي</label>
-                            <div class="col-sm-10">
-                                <x-form.input type="text" name="google_play" :value="$setting->google_play" />
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="example-text-input" class="col-sm-2 col-form-label fw-bold">رابط
-                                ابل </label>
-                            <div class="col-sm-10">
-                                <x-form.input type="text" name="apple_store" :value="$setting->apple_store" />
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="example-text-input" class="col-sm-2 col-form-label fw-bold">رابط
-                                الفيسبوك</label>
-                            <div class="col-sm-10">
-                                <x-form.input type="text" name="facebook" :value="$setting->facebook" />
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="example-text-input" class="col-sm-2 col-form-label fw-bold">رابط
-                                سناب</label>
-                            <div class="col-sm-10">
-                                <x-form.input type="text" name="snap" :value="$setting->snap" />
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="example-text-input" class="col-sm-2 col-form-label fw-bold">رابط
-                                تويتر</label>
-                            <div class="col-sm-10">
-                                <x-form.input type="text" name="twitter" :value="$setting->twitter" />
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="example-text-input" class="col-sm-2 col-form-label fw-bold">رابط
-                                الانستجرام</label>
-                            <div class="col-sm-10">
-                                <x-form.input type="text" name="instagram" :value="$setting->instagram" />
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="example-text-input" class="col-sm-2 col-form-label fw-bold">رابط
-                                تيك توك</label>
-                            <div class="col-sm-10">
-                                <x-form.input type="text" name="tiktok" :value="$setting->tiktok" />
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="example-text-input" class="col-sm-2 col-form-label fw-bold">
-                                مفتاح بوابة الدفع</label>
-                            <div class="col-sm-10">
-                                <x-form.input type="text" name="publishable_key" :value="$setting->publishable_key" />
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="example-text-input" class="col-sm-2 col-form-label fw-bold">
-                                الرقم السري لبوبة الدفع</label>
-                            <div class="col-sm-10">
-                                <x-form.input type="text" name="secret_key" :value="$setting->secret_key" />
-                            </div>
-                        </div>
-
-
-                        <div class="row mb-3">
-                            <label for="example-text-input" class="col-sm-2 col-form-label fw-bold">
-                                مفتاح بوابة الرسائل</label>
-                            <div class="col-sm-10">
-                                <x-form.input type="text" name="sms_api_key" :value="$setting->sms_api_key" />
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="example-text-input" class="col-sm-2 col-form-label fw-bold">
-                                اسم مستخدم بوابة الرسائل</label>
-                            <div class="col-sm-10">
-                                <x-form.input type="text" name="sms_user_name" :value="$setting->sms_user_name" />
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="example-text-input" class="col-sm-2 col-form-label fw-bold">
-                                اسم الراسل</label>
-                            <div class="col-sm-10">
-                                <x-form.input type="text" name="sms_sender" :value="$setting->sms_sender" />
-                            </div>
-                        </div>
-
                         <x-dashboard.image-preview image="{{ asset('storage/' . $setting->image) }}" fileName="image"
-                            heigh="32" width="32" title="ايقونة تبويب المتجر في المتصفح" />
+                            heigh="32" width="32" title="ايقونة تبويب التطبيق في المتصفح" />
 
                         <x-dashboard.image-preview image="{{ asset('storage/' . $setting->logo) }}" fileName="logo"
                             heigh="80" width="200" title="اللوجو" />
 
 
-                    </div><!-- end cardbody -->
-                </div><!-- end card -->
-            </div> <!-- end col -->
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="row">
@@ -212,9 +102,9 @@
                         <button id="submitBtn" class="btn btn-primary mt-5 mb-2" type="submit">حفظ التعديلات</button>
                     </div>
 
-                </div><!-- end cardbody -->
-            </div><!-- end card -->
-        </div> <!-- end col -->
+                </div>
+            </div>
+        </div>
         </div>
     </form>
 
