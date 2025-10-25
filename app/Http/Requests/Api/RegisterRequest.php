@@ -30,7 +30,7 @@ class RegisterRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'phone_number' => ['required', 'string', 'unique:users,phone_number'],
-            'ip_address' => ['required'],
+            'device_id' => ['required'],
         ];
     }
 

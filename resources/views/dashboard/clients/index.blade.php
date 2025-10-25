@@ -16,12 +16,15 @@
                 <x-alert type='dark'/>
                 <x-alert type='danger'/>
 
+                <x-form.search-form  :clients="$clients" />
+
                 <div class="table-responsive mt-2">
                     <table class="table table-striped table-bordered mt-2" id="product-table">
                         <thead>
                             <tr>
                                 <th>اسم العميل</th>
                                 <th>رقم الهاتف</th>
+                                <th>عنوان الip</th>
                                 <th>الحالة</th>
                                 <th>تحكم</th>
                             </tr>
@@ -32,6 +35,7 @@
                                 <tr>
                                     <td>{{ $client->name }}</td>
                                     <td>{{ $client->phone_number }}</td>
+                                    <td>{{ $client->ip_address }}</td>
                                     <td>
                                         @if ($client->is_active)
                                             <span class="badge bg-success">مفعل</span>

@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['changeLanguage'])->group(function () {
     Route::controller(UserAuthController::class)->group(function () {
         Route::post('register', 'register');
-        Route::get('check-active/{phone}', 'checkActive');
+        Route::post('check-active', 'checkActive');
     });
 
     Route::get('settings', [ApiSettingsController::class, 'settings']);
