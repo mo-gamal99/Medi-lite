@@ -19,7 +19,8 @@ class ClientRepository implements ClientInterface
 
   public function getMainClient()
   {
-    return $this->client->latest()->paginate();
+        $request = request();
+        return $this->client->latest()->filter($request->query())->paginate();
   }
 
   public function updatePassword($data, $id)

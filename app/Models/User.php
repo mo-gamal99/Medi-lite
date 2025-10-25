@@ -48,4 +48,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function scopeFilter($query, $filters)
+    {
+        if (!empty($filters['name'])) {
+            $query->where(function ($q) use ($filters) {
+                $q->where('name', 'LIKE', "%{$filters['name']}%")
+                    ->orWhere('phone_number', 'LIKE', "%{$filters['name']}%")
+                    ->orWhere('ip_address', 'LIKE', "%{$filters['name']}%");
+            });
+        }
+
+        if (!empty($filters['status'])) {
+            $query->where('is_active', $filters['status'] == 'active' ? 1 : 0);
+        }
+
+        return $query;
+    }
 }
