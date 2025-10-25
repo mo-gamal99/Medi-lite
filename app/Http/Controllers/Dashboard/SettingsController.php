@@ -79,7 +79,7 @@ class SettingsController extends Controller
         // if ($wasChanged || $oldOrderStatus->id != $newOrderStatus->id) {
         //   return back()->with('success', __('messages.SETTING_UPDATED'));
         // }
-        return back()->with('success', __('messages.SETTING_UPDATED'));
+        return back()->with('success', 'تم التحديث الإعدادات بنجاح.');
         // return back()->with('dark', __('messages.SETTING_NOT_UPDATED'));
     }
 }
