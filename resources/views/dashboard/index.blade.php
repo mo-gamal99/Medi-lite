@@ -21,7 +21,7 @@
                             </span>
                         </a>
 
-                        <x-dashboard.sidebarlogo />
+                        <x-dashboard.side-bar-logo />
                     </div>
 
                     <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect"
@@ -47,7 +47,7 @@
                         </button>
                     </div>
 
-                    <x-dashboard.notificationmenu count="28" />
+                    <x-dashboard.notification-menu count="28" />
 
                     <div class="dropdown d-inline-block">
                         <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"

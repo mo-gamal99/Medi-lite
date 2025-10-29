@@ -28,6 +28,8 @@ class User extends Authenticatable
         'device_id',
         'is_active',
         'phone_number',
+        'activated_at',
+        'expires_at',
     ];
 
     /**

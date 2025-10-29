@@ -28,7 +28,7 @@
 					</div>
 					<div class="pt-2">
 						<div class="float-end">
-							<a href="{{route('products.index')}}" class="text-white-50"><i class="mdi mdi-arrow-right h5 text-white-50"></i></a>
+							<a href="{{route('medicals.index')}}" class="text-white-50"><i class="mdi mdi-arrow-right h5 text-white-50"></i></a>
 						</div>
 					</div>
 				</div>
@@ -66,7 +66,7 @@
 					</div>
 					<div class="pt-2">
 						<div class="float-end">
-							<a href="{{route('admins.index')}}" class="text-white-50"><i class="mdi mdi-arrow-right h5 text-white-50"></i></a>
+							<a href="" class="text-white-50"><i class="mdi mdi-arrow-right h5 text-white-50"></i></a>
 						</div>
 					</div>
 				</div>

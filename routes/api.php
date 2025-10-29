@@ -30,7 +30,7 @@ Route::middleware(['changeLanguage'])->group(function () {
         Route::middleware('checkActiveUser')->group(function () {
             Route::get('export-medicals', [DataExportController::class, 'export']);
             Route::get('/', [MedicalController::class, 'index']);
-            Route::get('/{medical}', [MedicalController::class, 'show']);
+            Route::get('/{id}', [MedicalController::class, 'show']);
         });
     });
 });

@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('device_id')->nullable();
             $table->string('ip_address')->nullable();
             $table->boolean('is_active')->default(false);
+            $table->timestamp('activated_at')->nullable();
+            $table->timestamp('expires_at')->nullable();
             $table->string('password')->nullable();
             $table->rememberToken()->nullable();
             $table->timestamps();

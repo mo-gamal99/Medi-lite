@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Repositories\Client\ClientRepository;
 use Illuminate\Http\Request;
 
@@ -40,9 +41,27 @@ class ClientsController extends Controller
 
     public function toggleActivation($id)
     {
-        $client = $this->clientRepo->toggleActivation($id);
+        $client = User::findOrFail($id);
 
-        $status = $client->is_active ? 'تم تفعيل الحساب بنجاح ✅' : 'تم إلغاء التفعيل 🚫';
+        if ($client->is_active) {
+            // إلغاء التفعيل
+            $client->update([
+                'is_active' => false,
+                'activated_at' => null,
+                'expires_at' => null,
+            ]);
+            $status = 'تم إلغاء التفعيل 🚫';
+        } else {
+            // تفعيل جديد
+            $client->update([
+                'is_active' => true,
+                'activated_at' => now(),
+                'expires_at' => now()->addYear(),
+            ]);
+            $status = 'تم تفعيل الحساب بنجاح ✅';
+        }
+
         return redirect()->back()->with('success', $status);
     }
+
 }

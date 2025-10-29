@@ -25,48 +25,44 @@ class UserAuthController extends Controller
             'user' => $user,
         ]);
     }
-
-    // public function checkActive($phone)
-    // {
-    //     $user = User::where('phone_number', $phone)->first();
-
-    //     if (!$user) {
-    //         return ApiResponse::sendResponse(404, 'المستخدم غير موجود.');
-    //     }
-
-    //     if (!$user->is_active) {
-    //         return ApiResponse::sendResponse(403, 'الحساب غير مفعل بعد، تواصل مع الإدارة لتفعيله.');
-    //     }
-
-    //     return ApiResponse::sendResponse(200, 'الحساب مفعل ويمكنك استخدام التطبيق.');
-    // }
     public function checkActive(Request $request)
     {
         $request->validate([
-            'phone_number' => 'required',
             'device_id' => 'required',
         ]);
 
-        $user = User::where('phone_number', $request->phone_number)->first();
+        $user = User::where('device_id', $request->device_id)->first();
 
         if (!$user) {
-            return ApiResponse::sendResponse(404, 'المستخدم غير موجود.');
+            return ApiResponse::sendResponse(404, 'لم يتم العثور على مستخدم مرتبط بهذا الجهاز.');
         }
 
+        // لو مش مفعل
         if (!$user->is_active) {
             return ApiResponse::sendResponse(403, 'الحساب غير مفعل.');
         }
 
-        if ($user->device_id && $user->device_id !== $request->device_id) {
-            return ApiResponse::sendResponse(403, 'تم تسجيل الحساب على جهاز آخر. لا يمكن استخدامه من هذا الجهاز.');
+        // لو انتهت المدة
+        if ($user->expires_at && now()->greaterThan($user->expires_at)) {
+            $user->update(['is_active' => false]);
+            return ApiResponse::sendResponse(403, 'انتهت صلاحية الحساب. برجاء تجديد التفعيل.');
         }
 
-        if (!$user->device_id) {
-            $user->update([
-                'device_id' => $request->device_id,
-            ]);
-        }
+        // حساب باقي الأيام
+        $daysRemaining = $user->expires_at
+            ? now()->diffInDays($user->expires_at, false)
+            : null;
 
-        return ApiResponse::sendResponse(200, 'الحساب مفعل ويمكنك استخدام التطبيق.');
+        return ApiResponse::sendResponse(200, 'الحساب مفعل.', [
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'is_active' => $user->is_active,
+                'activated_at' => $user->activated_at,
+                'expires_at' => $user->expires_at,
+                'days_remaining' => $daysRemaining,
+            ]
+        ]);
     }
+
 }
