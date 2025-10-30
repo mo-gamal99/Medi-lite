@@ -27,10 +27,8 @@ Route::middleware(['changeLanguage'])->group(function () {
 
 
     Route::prefix('medicins')->group(function () {
-        Route::middleware('checkActiveUser')->group(function () {
-            Route::get('export-medicals', [DataExportController::class, 'export']);
-            Route::get('/', [MedicalController::class, 'index']);
-            Route::get('/{id}', [MedicalController::class, 'show']);
-        });
+        Route::get('export-medicals', [DataExportController::class, 'export']);
+        Route::get('/', [MedicalController::class, 'index']);
+        Route::get('/{id}', [MedicalController::class, 'show']);
     });
 });
