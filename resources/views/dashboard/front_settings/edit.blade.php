@@ -80,9 +80,6 @@
                             </div>
                         </div>
 
-                        <x-dashboard.image-preview image="{{ asset('storage/' . $setting->image) }}" fileName="image"
-                            heigh="32" width="32" title="ايقونة تبويب التطبيق في المتصفح" />
-
                         <x-dashboard.image-preview image="{{ asset('storage/' . $setting->logo) }}" fileName="logo"
                             heigh="80" width="200" title="اللوجو" />
 
