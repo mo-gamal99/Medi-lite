@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Exports\MedicalsExport;
 use App\Http\Controllers\Controller;
 use App\Imports\MedicalsImport;
 use App\Models\Medical;
@@ -20,18 +21,31 @@ class MedicalController extends Controller
 
         if ($request->filled('q')) {
             $q = $request->q;
-            $query->where(function ($qBuilder) use ($q) {
-                $qBuilder->where('name_ar', 'LIKE', "%$q%")
-                    ->orWhere('name_en', 'LIKE', "%$q%")
-                    ->orWhere('company', 'LIKE', "%$q%")
-                    ->orWhere('strength', 'LIKE', "%$q%")
-                    ->orWhere('indication', 'LIKE', "%$q%");
-            });
+            $field = $request->field ?? null;
+
+            $columns = ['name_ar', 'name_en', 'company', 'strength', 'strength'];
+
+            if ($field && in_array($field, $columns)) {
+                $query->where($field, 'LIKE', "%$q%");
+            } else {
+                $query->where(function ($qBuilder) use ($q) {
+                    $qBuilder->where('name_ar', 'LIKE', "%$q%")
+                        ->orWhere('name_en', 'LIKE', "%$q%")
+                        ->orWhere('company', 'LIKE', "%$q%")
+                        ->orWhere('strength', 'LIKE', "%$q%")
+                        ->orWhere('strength', 'LIKE', "%$q%");
+                });
+            }
         }
 
         $medicals = $query->orderByDesc('id')->paginate(25)->appends(['q' => $request->q]);
 
         return view('dashboard.medicals.index', compact('medicals'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new MedicalsExport, 'medicals.xlsx');
     }
 
     // ✅ رفع ملف Excel

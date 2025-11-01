@@ -1,15 +1,15 @@
 
-<a href="" class="logo logo-light">
+<a href="" class="logo logo-light ">
     <span class="logo-sm">
         <img
             src="{{ $settings->logo ? asset('storage/' . $settings->logo) : asset('assets/images/logo.jpg') }}"
-            alt="logo" height="40" width="40">
+            alt="logo" height="60" width="100%">
     </span>
 
     <span class="logo-lg">
         <img
             src="{{ $settings->logo ? asset('storage/' . $settings->logo) : asset('assets/images/logo.jpg') }}"
-            alt="logo" height="50" width="100%">
+            alt="logo" height="70px" width="100%" style="object-fit: contain;navbar-brand-box">
     </span>
 </a>
 

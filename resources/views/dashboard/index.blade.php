@@ -11,7 +11,7 @@
         <header id="page-topbar">
             <div class="navbar-header">
                 <div class="d-flex">
-                    <div class="navbar-brand-box">
+                    <div class="navbar-brand-box p-0">
                         <a href="index.html" class="logo logo-dark">
                             <span class="logo-sm">
                                 <img src="{{ asset('assets/images/logo-sm.png') }}" alt="" height="22">

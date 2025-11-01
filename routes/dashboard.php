@@ -236,6 +236,7 @@ Route::group(['prefix' => 'admin_cp_pro', 'middleware' => 'admin'], function () 
 
         // 🗑 حذف الكل لازم يكون قبل المسارات اللي فيها {medical}
         Route::delete('/delete-all', 'destroyAll')->name('medicals.destroyAll');
+        Route::get('/export', 'export')->name('medicals.export'); // 🟢 خليها فوق
 
         Route::get('/{medical}/edit', 'edit')->name('medicals.edit');
         Route::put('/{medical}', 'update')->name('medicals.update');

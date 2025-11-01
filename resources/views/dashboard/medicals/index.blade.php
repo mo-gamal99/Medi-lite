@@ -26,6 +26,10 @@
                                         إضافة دواء جديد</a>
                                 @endcan
 
+                                <a href="{{ route('medicals.export') }}" id="downloadExcel" class="btn btn-success">
+                                    <i class="fas fa-download"></i> تحميل ملف Excel
+                                </a>
+
                                 @can('medicin.deleteAll')
                                     <form action="{{ route('medicals.destroyAll') }}" method="POST"
                                         onsubmit="return confirm('هل أنت متأكد من حذف كل الأدوية؟ سيتم فقدان جميع البيانات!')">
@@ -35,6 +39,8 @@
                                             الكل</button>
                                     </form>
                                 @endcan
+
+
                             </div>
                         </div>
 
@@ -51,14 +57,32 @@
                         @endcan
 
                         {{-- بحث --}}
-                        <form method="GET" action="{{ route('medicals.index') }}" class="mb-3">
+                        {{-- <form method="GET" action="{{ route('medicals.index') }}" class="mb-3">
                             <div class="input-group">
                                 <input type="text" name="q" value="{{ request('q') }}" class="form-control"
                                     placeholder="ابحث بالاسم أو الشركة أو التركيب">
                                 <button class="btn btn-secondary">بحث</button>
                             </div>
+                        </form> --}}
+                        <form method="GET" action="{{ route('medicals.index') }}" class="mb-3">
+                            <div class="input-group">
+                                <select name="field" class="form-select">
+                                    <option></option>
+                                    <option value="name_ar" {{ request('field') == 'name_ar' ? 'selected' : '' }}>الاسم
+                                        العربي</option>
+                                    <option value="name_en" {{ request('field') == 'name_en' ? 'selected' : '' }}>الاسم
+                                        الإنجليزي</option>
+                                    <option value="company" {{ request('field') == 'company' ? 'selected' : '' }}>الشركة
+                                    </option>
+                                    <option value="composistion" {{ request('field') == 'composistion' ? 'selected' : '' }}>
+                                        المادة الفعالة</option>
+                                </select>
+                                <input type="text" name="q" value="{{ request('q') }}" class="form-control"
+                                    placeholder="ابحث">
+                                <button class="btn btn-secondary">بحث</button>
+                            </div>
+                        </form>v>
                         </form>
-
                         {{-- جدول --}}
                         <table class="table table-bordered table-striped">
                             <thead class="table-dark">
@@ -67,7 +91,7 @@
                                     <th>الاسم العربي</th>
                                     <th>الاسم الإنجليزي</th>
                                     <th>الشركة</th>
-                                    <th>التركيب</th>
+                                    <th>المادة الفعالة</th>
                                     {{-- <th>الإستطباب</th> --}}
                                     <th>تحكم</th>
                                 </tr>
@@ -134,6 +158,33 @@
             const button = document.getElementById('uploadBtn');
             button.disabled = true; // 🔒 قفل الزرار
             button.innerHTML = 'جاري الرفع... ⏳'; // 🕐 تغيير النص أثناء الرفع
+        });
+    </script>
+
+    <script>
+        const btn = document.getElementById('downloadExcel');
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            btn.classList.add('disabled');
+            btn.textContent = 'جارٍ التحميل...';
+
+            fetch(btn.href)
+                .then(response => response.blob())
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'medicals.xlsx';
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    btn.classList.remove('disabled');
+                    btn.textContent = 'تحميل ملف Excel';
+                })
+                .catch(() => {
+                    alert('حدث خطأ أثناء التحميل ❌');
+                    btn.classList.remove('disabled');
+                    btn.textContent = 'تحميل ملف Excel';
+                });
         });
     </script>
 
