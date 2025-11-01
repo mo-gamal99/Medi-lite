@@ -15,15 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('barcode')->nullable();
             $table->string('name_ar')->nullable();
-            $table->text('indication')->nullable();
-            $table->string('dosage')->nullable();
+            $table->text('indication')->nullable(); // دواعي الاستعمال
+            $table->string('dosage')->nullable(); /// الجرعة
             $table->string('name_en')->nullable();
-            $table->string('composistion')->nullable();
-            $table->string('strength')->nullable();
+            $table->string('composistion')->nullable(); // التركيب
+            $table->string('strength')->nullable(); // التركيز المادة الفعالة
             $table->string('company')->nullable();
-            $table->decimal('net', 10, 2)->nullable();
-            $table->decimal('public', 10, 2)->nullable();
-            $table->string('pregnancy')->nullable();
+            $table->decimal('net', 10, 2)->nullable(); // سعر البيع من الشركة
+            $table->decimal('public', 10, 2)->nullable(); // سعر البيع للجمهور
+            $table->string('pregnancy')->nullable(); // تصنيف الأمان أثناء الحمل
             $table->timestamps();
 
             // 🧩 إضافة فهرس FullText للبحث السريع

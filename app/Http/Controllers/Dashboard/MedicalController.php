@@ -14,7 +14,6 @@ class MedicalController extends Controller
     {
         $query = Medical::query();
 
-        // فلترة بالبحث لو فيه كلمة
         if ($request->filled('q')) {
             $q = $request->q;
             $query->where(function ($qBuilder) use ($q) {
@@ -23,7 +22,6 @@ class MedicalController extends Controller
                     ->orWhere('company', 'LIKE', "%$q%")
                     ->orWhere('strength', 'LIKE', "%$q%")
                     ->orWhere('indication', 'LIKE', "%$q%");
-
             });
         }
 
@@ -45,6 +43,34 @@ class MedicalController extends Controller
 
         return back()->with('success', 'تم رفع بيانات الأدوية بنجاح ✅');
     }
+    public function create()
+    {
+        return view('dashboard.medicals.create');
+    }
+
+    // ✅ حفظ دواء جديد
+    public function store(Request $request)
+    {
+        $request->validate([
+            'barcode' => ['nullable', 'string', 'max:255'],
+            'name_ar' => ['required', 'string', 'max:255'],
+            'name_en' => ['nullable', 'string', 'max:255'],
+            'company' => ['nullable', 'string', 'max:255'],
+            'composistion' => ['nullable', 'string', 'max:255'],
+            'strength' => ['nullable', 'string', 'max:255'],
+            'dosage' => ['nullable', 'string', 'max:255'],
+            'indication' => ['nullable', 'string', 'max:255'],
+            'net' => 'nullable|numeric|min:0|max:99999999.99',
+            'public' => 'nullable|numeric|min:0|max:99999999.99',
+            'pregnancy' => ['nullable', 'string', 'max:255'],
+        ]);
+
+
+        Medical::create($request->all());
+
+        return redirect()->route('medicals.index')->with('success', 'تم إضافة الدواء بنجاح ✅');
+    }
+
 
     // ✅ صفحة تعديل دواء
     public function edit(Medical $medical)
@@ -52,17 +78,45 @@ class MedicalController extends Controller
         return view('dashboard.medicals.edit', compact('medical'));
     }
 
-    // ✅ حفظ التعديلات
     public function update(Request $request, Medical $medical)
     {
         $request->validate([
+            'barcode' => 'nullable|string|max:255',
             'name_ar' => 'required|string|max:255',
             'name_en' => 'nullable|string|max:255',
             'company' => 'nullable|string|max:255',
+            'composistion' => 'nullable|string|max:255',
+            'strength' => 'nullable|string|max:255',
+            'indication' => 'nullable|string|max:255',
+            'net' => 'nullable|numeric|min:0|max:99999999.99',
+            'public' => 'nullable|numeric|min:0|max:99999999.99',
+            'pregnancy' => 'nullable|string|max:255',
         ]);
 
         $medical->update($request->all());
 
         return redirect()->route('medicals.index')->with('success', 'تم تحديث بيانات الدواء بنجاح ✅');
+    }
+
+
+
+    // ✅ عرض التفاصيل
+    public function show(Medical $medical)
+    {
+        return view('dashboard.medicals.show', compact('medical'));
+    }
+
+    // 🗑 حذف عنصر واحد
+    public function destroy(Medical $medical)
+    {
+        $medical->delete();
+        return redirect()->route('medicals.index')->with('success', 'تم حذف الدواء بنجاح 🗑️');
+    }
+
+    // 🚨 حذف جميع الأدوية
+    public function destroyAll()
+    {
+        Medical::truncate();
+        return redirect()->route('medicals.index')->with('success', 'تم حذف جميع الأدوية بنجاح 🧹');
     }
 }

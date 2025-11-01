@@ -1,11 +1,11 @@
 @extends('dashboard.index')
 
-@section('title', 'تعديل منتج')
+@section('title', 'تعديل دواء')
 
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item"><a href="{{ route('products.index') }}">الادوية</a></li>
-    <li class="breadcrumb-item">تعديل منتج</li>
+    <li class="breadcrumb-item"><a href="{{ route('medicals.index') }}">الأدوية</a></li>
+    <li class="breadcrumb-item">تعديل دواء</li>
 @endsection
 
 @section('section')
@@ -14,34 +14,22 @@
 
         <form method="POST" action="{{ route('medicals.update', $medical) }}">
             @csrf
-            <div class="mb-3">
-                <label>الاسم العربي</label>
-                <input type="text" name="name_ar" value="{{ $medical->name_ar }}" class="form-control" required>
-            </div>
+            @method('PUT')
 
-            <div class="mb-3">
-                <label>الاسم الإنجليزي</label>
-                <input type="text" name="name_en" value="{{ $medical->name_en }}" class="form-control">
-            </div>
+            <x-form.input name="barcode" label="الباركود" :value="$medical->barcode" />
+            <x-form.input name="name_ar" label="الاسم العربي" :value="$medical->name_ar" required />
+            <x-form.input name="name_en" label="الاسم الإنجليزي" :value="$medical->name_en" />
+            <x-form.input name="company" label="الشركة" :value="$medical->company" />
+            <x-form.input name="composistion" label="التركيب العلمي" :value="$medical->composistion" />
+            <x-form.input name="strength" label="القوة (Strength)" :value="$medical->strength" />
+            <x-form.input name="indication" label="الإستطباب" :value="$medical->indication" />
+            <x-form.input type="number" step="0.01" min="0" name="public" label="السعر العام"
+                :value="$medical->public" />
+            <x-form.input type="number" step="0.01" min="0" name="net" label="سعر النت" :value="$medical->net" />
+            <x-form.input name="pregnancy" label="ملاحظات الحمل" :value="$medical->pregnancy" />
 
-            <div class="mb-3">
-                <label>الشركة</label>
-                <input type="text" name="company" value="{{ $medical->company }}" class="form-control">
-            </div>
-
-            <div class="mb-3">
-                <label>التركيب العلمي</label>
-                <input type="text" name="composistion" value="{{ $medical->composistion }}" class="form-control">
-            </div>
-
-            <div class="mb-3">
-                <label>السعر العام</label>
-                <input type="number" step="0.01" name="public" value="{{ $medical->public }}" class="form-control">
-            </div>
-
-            <button class="btn btn-success">تحديث</button>
-            <a href="{{ route('medicals.index') }}" class="btn btn-secondary">رجوع</a>
+            <button class="btn btn-success mt-3">تحديث</button>
+            <a href="{{ route('medicals.index') }}" class="btn btn-secondary mt-3">رجوع</a>
         </form>
     </div>
-
 @endsection

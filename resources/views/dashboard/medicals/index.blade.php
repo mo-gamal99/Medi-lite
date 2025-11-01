@@ -16,17 +16,31 @@
                     <x-alert type='danger' />
                     <x-alert type='dark' />
                     {{-- <x-form.search-form :medicals="$medicals" /> --}}
-
                     <div class="container mt-4">
-                        <h3 class="mb-4">إدارة الأدوية</h3>
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h3 class="m-0">إدارة الأدوية</h3>
+
+                            <div class="d-flex gap-2">
+                                <a href="{{ route('medicals.create') }}" class="btn btn-success"><i class="fas fa-plus"></i>
+                                    إضافة دواء جديد</a>
+
+                                <form action="{{ route('medicals.destroyAll') }}" method="POST"
+                                    onsubmit="return confirm('هل أنت متأكد من حذف كل الأدوية؟ سيتم فقدان جميع البيانات!')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> حذف
+                                        الكل</button>
+                                </form>
+                            </div>
+                        </div>
 
                         {{-- رفع ملف Excel --}}
                         <form action="{{ route('medicals.upload') }}" method="POST" enctype="multipart/form-data"
-                            class="mb-4">
+                            class="mb-4" id="uploadForm">
                             @csrf
                             <div class="input-group">
                                 <input type="file" name="file" class="form-control" required>
-                                <button class="btn btn-primary">رفع الملف</button>
+                                <button type="submit" id="uploadBtn" class="btn btn-primary">رفع الملف</button>
                             </div>
                         </form>
 
@@ -39,47 +53,76 @@
                             </div>
                         </form>
 
-                        {{-- تنبيه --}}
-                        {{-- @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif --}}
-
-                        {{-- جدول الأدوية --}}
+                        {{-- جدول --}}
                         <table class="table table-bordered table-striped">
                             <thead class="table-dark">
                                 <tr>
-                                    <th>#</th>
+                                    <th>الباركود</th>
                                     <th>الاسم العربي</th>
                                     <th>الاسم الإنجليزي</th>
                                     <th>الشركة</th>
                                     <th>التركيب</th>
-                                    <th>الإستطباب</th>
+                                    {{-- <th>الإستطباب</th> --}}
                                     <th>تحكم</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($medicals as $m)
+                                @forelse ($medicals as $m)
                                     <tr>
-                                        <td>{{ $m->id }}</td>
+                                        <td>{{ $m->barcode }}</td>
                                         <td>{{ $m->name_ar }}</td>
                                         <td>{{ $m->name_en }}</td>
                                         <td>{{ $m->company }}</td>
                                         <td>{{ $m->strength }}</td>
-                                        <td>{{ $m->indication }}</td>
-                                        <td>
-                                            <a href="{{ route('medicals.edit', $m) }}" class="btn btn-sm btn-info">تعديل</a>
+                                        {{-- <td>{{ $m->indication }}</td> --}}
+                                        <td class="text-center" style="white-space: nowrap; width: 150px;">
+                                            <div class="d-flex justify-content-center align-items-center gap-1">
+
+                                                <a href="{{ route('medicals.show', $m) }}" title="التفاصيل"
+                                                    class="btn btn-sm btn-dark">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+
+                                                <a href="{{ route('medicals.edit', $m) }}" title="تعديل"
+                                                    class="btn btn-sm btn-info">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </a>
+
+                                                <form action="{{ route('medicals.destroy', $m) }}" method="POST"
+                                                    onsubmit="return confirm('هل أنت متأكد من حذف هذا الدواء؟ ⚠️')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-sm btn-danger" title="حذف">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </button>
+                                                </form>
+
+                                            </div>
                                         </td>
+
                                     </tr>
-                                @endforeach
+                                @empty
+                                    <tr>
+                                        <td colspan="7" class="text-center">لا يوجد بيانات</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
 
                         {{ $medicals->links() }}
                     </div>
-                    <!-- end -->
+
                 </div>
             </div>
-        </div> <!-- end col -->
+        </div>
     </div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            const button = document.getElementById('uploadBtn');
+            button.disabled = true; // 🔒 قفل الزرار
+            button.innerHTML = 'جاري الرفع... ⏳'; // 🕐 تغيير النص أثناء الرفع
+        });
+    </script>
 
 @endsection

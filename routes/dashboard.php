@@ -229,10 +229,21 @@ Route::group(['prefix' => 'admin_cp_pro', 'middleware' => 'admin'], function () 
     Route::post('/searchReport', [ReportsController::class, 'searchReport'])->name('search_report');
 
 
-    Route::get('/medicals', [MedicalController::class, 'index'])->name('medicals.index');
-    Route::post('/upload', [MedicalController::class, 'upload'])->name('medicals.upload');
-    Route::get('/edit/{medical}', [MedicalController::class, 'edit'])->name('medicals.edit');
-    Route::post('/update/{medical}', [MedicalController::class, 'update'])->name('medicals.update');
+    Route::prefix('medicals')->controller(MedicalController::class)->group(function () {
+        Route::get('/', 'index')->name('medicals.index');
+        Route::get('/create', 'create')->name('medicals.create');
+        Route::post('/', 'store')->name('medicals.store');
+
+        // 🗑 حذف الكل لازم يكون قبل المسارات اللي فيها {medical}
+        Route::delete('/delete-all', 'destroyAll')->name('medicals.destroyAll');
+
+        Route::get('/{medical}/edit', 'edit')->name('medicals.edit');
+        Route::put('/{medical}', 'update')->name('medicals.update');
+        Route::get('/{medical}', 'show')->name('medicals.show');
+        Route::delete('/{medical}', 'destroy')->name('medicals.destroy');
+
+        Route::post('/upload', 'upload')->name('medicals.upload');
+    });
 });
 
 //----------------------------------------------/Admin login
