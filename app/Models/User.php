@@ -50,15 +50,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'activated_at' => 'datetime',
+        'expires_at' => 'datetime',
     ];
 
     public function scopeFilter($query, $filters)
     {
-        if (!empty($filters['name'])) {
-            $query->where(function ($q) use ($filters) {
-                $q->where('name', 'LIKE', "%{$filters['name']}%")
-                    ->orWhere('phone_number', 'LIKE', "%{$filters['name']}%")
-                    ->orWhere('ip_address', 'LIKE', "%{$filters['name']}%");
+        if (!empty($filters['q'])) {
+            $q = $filters['q'];
+            $query->where(function ($query) use ($q) {
+                $query->where('name', 'LIKE', "%{$q}%")
+                    ->orWhere('phone_number', 'LIKE', "%{$q}%")
+                    ->orWhere('ip_address', 'LIKE', "%{$q}%")
+                    ->orWhere('device_id', 'LIKE', "%{$q}%");
             });
         }
 
@@ -68,4 +72,5 @@ class User extends Authenticatable
 
         return $query;
     }
+
 }
