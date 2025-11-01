@@ -16,7 +16,6 @@
                 <x-alert type='dark' />
                 <x-alert type='danger' />
                 <div class="card-body">
-                    {{-- Form Start --}}
                     <form method="post" action="{{ route('admins.update', $admin->id) }}" enctype="multipart/form-data">
                         @csrf
                         @method('put')
@@ -67,11 +66,10 @@
 
                         <button class="btn btn-primary mt-5" type="submit">حفظ</button>
                     </form>
-                </div><!-- end cardbody -->
-            </div><!-- end card -->
-        </div> <!-- end col -->
+                </div>
+            </div>
+        </div>
 
-        {{-- sub category in edit page --}}
     </div>
 
     {{-- @can('admin.change_password') --}}
@@ -80,7 +78,6 @@
                 <div class="font-size-18 fw-bold mb-2">تغيير الرقم السري</div>
                 <div class="card">
                     <div class="card-body">
-                        {{-- Form Start --}}
                         <form method="post" action="{{ route('admins.update_password', $admin->id) }}"
                             enctype="multipart/form-data">
                             @csrf
@@ -110,14 +107,12 @@
                             <button class="btn btn-primary mt-5" type="submit">حفظ</button>
 
                         </form>
-                    </div><!-- end cardbody -->
-                </div><!-- end card -->
-            </div> <!-- end col -->
+                    </div>
+                </div>
+            </div>
 
-            {{-- sub category in edit page --}}
+
         </div>
-    {{-- @endcan --}}
 
-    {{-- Form End --}}
 
 @endsection

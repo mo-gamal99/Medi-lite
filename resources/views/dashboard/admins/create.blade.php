@@ -70,11 +70,10 @@
                         </div>
 
 
-                </div><!-- end cardbody -->
-            </div><!-- end card -->
-        </div> <!-- end col -->
-    </div> <!-- end col -->
-
+                </div>
+            </div>
+        </div>
+    </div>
     {{-- sub category in edit page --}}
 
 

@@ -12,6 +12,13 @@
 <script src="{{ asset('assets/libs/chartist/chartist.min.js') }}"></script>
 <script src="{{ asset('assets/libs/chartist-plugin-tooltips/chartist-plugin-tooltip.min.js') }}"></script>
 
+
+
+<!-- Chart JS -->
+<script src="{{ asset('assets/libs/chart.js/Chart.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/js/pages/chartjs.init.j') }}"></script>
+
+
 <script src="{{ asset('assets/js/pages/dashboard.init.js') }}"></script>
 
 <!-- Sweet Alerts js -->

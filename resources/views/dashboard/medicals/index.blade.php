@@ -21,28 +21,34 @@
                             <h3 class="m-0">إدارة الأدوية</h3>
 
                             <div class="d-flex gap-2">
-                                <a href="{{ route('medicals.create') }}" class="btn btn-success"><i class="fas fa-plus"></i>
-                                    إضافة دواء جديد</a>
+                                @can('medicin.create')
+                                    <a href="{{ route('medicals.create') }}" class="btn btn-success"><i class="fas fa-plus"></i>
+                                        إضافة دواء جديد</a>
+                                @endcan
 
-                                <form action="{{ route('medicals.destroyAll') }}" method="POST"
-                                    onsubmit="return confirm('هل أنت متأكد من حذف كل الأدوية؟ سيتم فقدان جميع البيانات!')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> حذف
-                                        الكل</button>
-                                </form>
+                                @can('medicin.deleteAll')
+                                    <form action="{{ route('medicals.destroyAll') }}" method="POST"
+                                        onsubmit="return confirm('هل أنت متأكد من حذف كل الأدوية؟ سيتم فقدان جميع البيانات!')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> حذف
+                                            الكل</button>
+                                    </form>
+                                @endcan
                             </div>
                         </div>
 
                         {{-- رفع ملف Excel --}}
-                        <form action="{{ route('medicals.upload') }}" method="POST" enctype="multipart/form-data"
-                            class="mb-4" id="uploadForm">
-                            @csrf
-                            <div class="input-group">
-                                <input type="file" name="file" class="form-control" required>
-                                <button type="submit" id="uploadBtn" class="btn btn-primary">رفع الملف</button>
-                            </div>
-                        </form>
+                        @can('medicin.upload')
+                            <form action="{{ route('medicals.upload') }}" method="POST" enctype="multipart/form-data"
+                                class="mb-4" id="uploadForm">
+                                @csrf
+                                <div class="input-group">
+                                    <input type="file" name="file" class="form-control" required>
+                                    <button type="submit" id="uploadBtn" class="btn btn-primary">رفع الملف</button>
+                                </div>
+                            </form>
+                        @endcan
 
                         {{-- بحث --}}
                         <form method="GET" action="{{ route('medicals.index') }}" class="mb-3">
@@ -78,24 +84,30 @@
                                         <td class="text-center" style="white-space: nowrap; width: 150px;">
                                             <div class="d-flex justify-content-center align-items-center gap-1">
 
-                                                <a href="{{ route('medicals.show', $m) }}" title="التفاصيل"
-                                                    class="btn btn-sm btn-dark">
-                                                    <i class="fas fa-eye"></i>
-                                                </a>
+                                                @can('medicin.detials')
+                                                    <a href="{{ route('medicals.show', $m) }}" title="التفاصيل"
+                                                        class="btn btn-sm btn-dark">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                @endcan
 
-                                                <a href="{{ route('medicals.edit', $m) }}" title="تعديل"
-                                                    class="btn btn-sm btn-info">
-                                                    <i class="fas fa-pencil-alt"></i>
-                                                </a>
+                                                @can('medicin.edit')
+                                                    <a href="{{ route('medicals.edit', $m) }}" title="تعديل"
+                                                        class="btn btn-sm btn-info">
+                                                        <i class="fas fa-pencil-alt"></i>
+                                                    </a>
+                                                @endcan
 
-                                                <form action="{{ route('medicals.destroy', $m) }}" method="POST"
-                                                    onsubmit="return confirm('هل أنت متأكد من حذف هذا الدواء؟ ⚠️')">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="btn btn-sm btn-danger" title="حذف">
-                                                        <i class="fas fa-trash-alt"></i>
-                                                    </button>
-                                                </form>
+                                                @can('medicin.delete')
+                                                    <form action="{{ route('medicals.destroy', $m) }}" method="POST"
+                                                        onsubmit="return confirm('هل أنت متأكد من حذف هذا الدواء؟ ⚠️')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="btn btn-sm btn-danger" title="حذف">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </form>
+                                                @endcan
 
                                             </div>
                                         </td>

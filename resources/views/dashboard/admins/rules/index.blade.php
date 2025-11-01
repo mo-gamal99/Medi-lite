@@ -43,7 +43,6 @@
                                 <tr data-id="5">
 
                                     <td data-field="id">{{ $rule->name }}</td>
-                                    {{--                                            <td data-field="name">{{ $product->product_quantity }}</td>--}}
                                     <td data-field="gender">{{ $rule->created_at->format('Y-m-d H:i') }}</td>
 
                                     {{-- @can('admin.group.edit') --}}

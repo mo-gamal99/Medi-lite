@@ -19,9 +19,7 @@ class AdminRepository implements AdminInterface
     public function getAll()
     {
         return $this->admin->latest()
-            ->where('id', '!=', auth()->guard('admin')->user()->id)
-            ->where('id', '!=', 2)
-            ->paginate();
+            ->where('id', '!=', auth()->guard('admin')->user()->id)->paginate();
     }
 
     public function store($data)

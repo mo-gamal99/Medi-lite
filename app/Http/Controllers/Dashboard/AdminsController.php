@@ -76,7 +76,7 @@ class AdminsController extends Controller
 
         $admin = Admin::findOrFail($id);
         $rules = Rule::all();
-        $adminRules = $admin->rules()->pluck('id')->toArray();
+        $adminRules = $admin->rules()->pluck('rules.id')->toArray();
         return view("dashboard.admins.edit", compact("admin", 'rules', 'adminRules'));
     }
 

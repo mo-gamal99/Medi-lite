@@ -5,13 +5,17 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Imports\MedicalsImport;
 use App\Models\Medical;
+use GMP;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Maatwebsite\Excel\Facades\Excel;
 
 class MedicalController extends Controller
 {
     public function index(Request $request)
     {
+        Gate::authorize('medicin.view');
+
         $query = Medical::query();
 
         if ($request->filled('q')) {
@@ -33,6 +37,7 @@ class MedicalController extends Controller
     // ✅ رفع ملف Excel
     public function upload(Request $request)
     {
+        Gate::authorize('medicin.upload');
         $request->validate([
             'file' => 'required|mimes:xlsx,xls'
         ]);
@@ -45,12 +50,14 @@ class MedicalController extends Controller
     }
     public function create()
     {
+        Gate::authorize('medicin.create');
         return view('dashboard.medicals.create');
     }
 
     // ✅ حفظ دواء جديد
     public function store(Request $request)
     {
+        Gate::authorize('medicin.create');
         $request->validate([
             'barcode' => ['nullable', 'string', 'max:255'],
             'name_ar' => ['required', 'string', 'max:255'],
@@ -75,11 +82,13 @@ class MedicalController extends Controller
     // ✅ صفحة تعديل دواء
     public function edit(Medical $medical)
     {
+        Gate::authorize('medicin.edit');
         return view('dashboard.medicals.edit', compact('medical'));
     }
 
     public function update(Request $request, Medical $medical)
     {
+        Gate::authorize('medicin.edit');
         $request->validate([
             'barcode' => 'nullable|string|max:255',
             'name_ar' => 'required|string|max:255',
@@ -103,12 +112,14 @@ class MedicalController extends Controller
     // ✅ عرض التفاصيل
     public function show(Medical $medical)
     {
+        Gate::authorize('medicin.detials');
         return view('dashboard.medicals.show', compact('medical'));
     }
 
     // 🗑 حذف عنصر واحد
     public function destroy(Medical $medical)
     {
+        Gate::authorize('medicin.delete');
         $medical->delete();
         return redirect()->route('medicals.index')->with('success', 'تم حذف الدواء بنجاح 🗑️');
     }
@@ -116,6 +127,7 @@ class MedicalController extends Controller
     // 🚨 حذف جميع الأدوية
     public function destroyAll()
     {
+        Gate::authorize('medicin.deleteAll');
         Medical::truncate();
         return redirect()->route('medicals.index')->with('success', 'تم حذف جميع الأدوية بنجاح 🧹');
     }

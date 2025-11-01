@@ -24,7 +24,6 @@
                         @endforelse
 
                     </div>
-                    <!-- end row -->
                 </div>
 
             </div>

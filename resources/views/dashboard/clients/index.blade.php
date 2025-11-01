@@ -28,7 +28,9 @@
                                     <th>الحالة</th>
                                     <th>تاريخ التفعيل</th>
                                     <th>تاريخ انتهاء الصلاحية</th>
-                                    <th>تحكم</th>
+                                    @can('client.control')
+                                        <th>تحكم</th>
+                                    @endcan
                                 </tr>
                             </thead>
 
@@ -54,14 +56,16 @@
                                             {{ $client->expires_at ? $client->expires_at->format('Y-m-d H:i') : '-' }}
                                         </td>
                                         <td>
-                                            <form action="{{ route('clients.toggle', $client->id) }}" method="POST"
-                                                style="display:inline;">
-                                                @csrf
-                                                <button type="submit"
-                                                    class="btn btn-sm {{ $client->is_active ? 'btn-danger' : 'btn-success' }}">
-                                                    {{ $client->is_active ? 'إلغاء التفعيل' : 'تفعيل' }}
-                                                </button>
-                                            </form>
+                                            @can('client.control')
+                                                <form action="{{ route('clients.toggle', $client->id) }}" method="POST"
+                                                    style="display:inline;">
+                                                    @csrf
+                                                    <button type="submit"
+                                                        class="btn btn-sm {{ $client->is_active ? 'btn-danger' : 'btn-success' }}">
+                                                        {{ $client->is_active ? 'إلغاء التفعيل' : 'تفعيل' }}
+                                                    </button>
+                                                </form>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @empty

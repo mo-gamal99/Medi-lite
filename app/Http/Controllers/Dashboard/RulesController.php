@@ -22,7 +22,7 @@ class RulesController extends Controller
    */
   public function index()
   {
-    //Gate::authorize('admin.group.view');
+    Gate::authorize('admin.group.view');
     $rules = $this->ruleRepository->getAll();
     return view('dashboard.admins.rules.index', compact('rules'));
   }
@@ -32,7 +32,7 @@ class RulesController extends Controller
    */
   public function create()
   {
-    //Gate::authorize('admin.group.create');
+    Gate::authorize('admin.group.create');
 
     return view('dashboard.admins.rules.create');
   }
@@ -42,7 +42,7 @@ class RulesController extends Controller
    */
   public function store(Request $request)
   {
-    //Gate::authorize('admin.group.create');
+    Gate::authorize('admin.group.create');
 
     $request->validate([
       'name' => 'required|string|max:255',
@@ -50,7 +50,7 @@ class RulesController extends Controller
     ]);
 
     $this->ruleRepository->store($request);
-    return to_route('rules.index')->with('success', __('messages.RULE_CREATED'));
+    return to_route('rules.index')->with('success', 'تم اضافة المجموعة بنجاح');
   }
 
   /**
@@ -66,7 +66,7 @@ class RulesController extends Controller
    */
   public function edit(Rule $rule)
   {
-    //Gate::authorize('admin.group.edit');
+    Gate::authorize('admin.group.edit');
 
     $rule_abilities = $rule->abilities()->pluck('type', 'ability')->toArray();
 
@@ -78,7 +78,7 @@ class RulesController extends Controller
    */
   public function update(Request $request, Rule $rule)
   {
-    //Gate::authorize('admin.group.edit');
+    Gate::authorize('admin.group.edit');
 
     if (!$request->input('abilities')) {
       return back()->with('info', 'برجاء تحديد صلاحية واحده على الاقل أو مسح المجموعة');
@@ -91,7 +91,7 @@ class RulesController extends Controller
 
     $this->ruleRepository->update($request, $rule->id);
 
-    return to_route('rules.index')->with('success', __('messages.RULE_UPDATED'));
+    return to_route('rules.index')->with('success','تم تعديل المجموعة بنجاح');
   }
 
   /**
@@ -99,9 +99,9 @@ class RulesController extends Controller
    */
   public function destroy(string $id)
   {
-    //Gate::authorize('admin.group.delete');
+    Gate::authorize('admin.group.delete');
 
     $this->ruleRepository->delete($id);
-    return to_route('rules.index')->with('dark', __('messages.RULE_DELETED'));
+    return to_route('rules.index')->with('dark','تم حذف المجموعة بنجاح');
   }
 }
