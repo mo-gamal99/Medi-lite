@@ -117,4 +117,36 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <h4 class="card-title mb-4">الاحصائيات</h4>
+
+                    <div class="row justify-content-center">
+                        <div class="col-sm-4">
+                            <div class="text-center">
+                                <h5 class="mb-0 font-size-20">{{ $notActiveUsersCount }}</h5>
+                                <p class="text-muted">غير نشط</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="text-center">
+                                <h5 class="mb-0 font-size-20">{{ $activeUsersCount }}</h5>
+                                <p class="text-muted">نشط</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <span id="months-data" hidden>@json($months)</span>
+                    <span id="active-data" hidden>@json($activeData)</span>
+                    <span id="inactive-data" hidden>@json($inactiveData)</span>
+                    <canvas id="lineChart" height="300"></canvas>
+
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

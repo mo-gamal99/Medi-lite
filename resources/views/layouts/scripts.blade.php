@@ -16,7 +16,7 @@
 
 <!-- Chart JS -->
 <script src="{{ asset('assets/libs/chart.js/Chart.bundle.min.js') }}"></script>
-<script src="{{ asset('assets/js/pages/chartjs.init.j') }}"></script>
+<script src="{{ asset('assets/js/pages/chartjs.init.js') }}"></script>
 
 
 <script src="{{ asset('assets/js/pages/dashboard.init.js') }}"></script>
