@@ -24,6 +24,7 @@
                                 <tr>
                                     <th>اسم العميل</th>
                                     <th>رقم الهاتف</th>
+                                    <th>رقم الجهاز</th>
                                     <th>الحالة</th>
                                     <th>تاريخ التفعيل</th>
                                     <th>تاريخ انتهاء الصلاحية</th>
@@ -36,6 +37,8 @@
                                     <tr>
                                         <td>{{ $client->name }}</td>
                                         <td>{{ $client->phone_number }}</td>
+                                        <td>{{ $client->device_id }}</td>
+
                                         <td>
                                             @if ($client->is_active)
                                                 <span class="badge bg-success">مفعل</span>
