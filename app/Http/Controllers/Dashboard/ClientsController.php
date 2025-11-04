@@ -68,4 +68,15 @@ class ClientsController extends Controller
 
         return redirect()->back()->with('success', $status);
     }
+
+    public function destroy($id)
+    {
+        Gate::authorize('client.control');
+
+        $client = User::findOrFail($id);
+
+        $client->delete();
+
+        return redirect()->back()->with('danger', 'تم حذف العميل بنجاح 🗑️');
+    }
 }

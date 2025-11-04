@@ -57,12 +57,20 @@
                                         </td>
                                         <td>
                                             @can('client.control')
-                                                <form action="{{ route('clients.toggle', $client->id) }}" method="POST"
-                                                    style="display:inline;">
+                                                <form action="{{ route('clients.toggle', $client->id) }}" method="POST" style="display:inline;">
                                                     @csrf
                                                     <button type="submit"
-                                                        class="btn btn-sm {{ $client->is_active ? 'btn-danger' : 'btn-success' }}">
+                                                        class="btn btn-sm {{ $client->is_active ? 'btn-warning' : 'btn-success' }}">
                                                         {{ $client->is_active ? 'إلغاء التفعيل' : 'تفعيل' }}
+                                                    </button>
+                                                </form>
+
+                                                <form action="{{ route('clients.destroy', $client->id) }}" method="POST"
+                                                    style="display:inline;" onsubmit="return confirm('هل أنت متأكد من حذف هذا العميل؟');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-danger">
+                                                        حذف
                                                     </button>
                                                 </form>
                                             @endcan
