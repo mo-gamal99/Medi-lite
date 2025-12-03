@@ -29,6 +29,8 @@ class User extends Authenticatable
         'is_active',
         'phone_number',
         'activated_at',
+        'fcm_token',
+        'verification_document',
         'expires_at',
     ];
 
@@ -72,5 +74,16 @@ class User extends Authenticatable
 
         return $query;
     }
+
+
+    public function getVerificationDocumentUrlAttribute()
+    {
+        if (!$this->verification_document) {
+            return null;
+        }
+
+        return asset('storage/' . $this->verification_document);
+    }
+
 
 }

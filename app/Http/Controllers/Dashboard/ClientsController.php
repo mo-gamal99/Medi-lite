@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Repositories\Client\ClientRepository;
+use App\Services\Notifications\FireBase;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 
@@ -49,7 +50,6 @@ class ClientsController extends Controller
         $client = User::findOrFail($id);
 
         if ($client->is_active) {
-            // إلغاء التفعيل
             $client->update([
                 'is_active' => false,
                 'activated_at' => null,
@@ -57,14 +57,32 @@ class ClientsController extends Controller
             ]);
             $status = 'تم إلغاء التفعيل 🚫';
         } else {
-            // تفعيل جديد
             $client->update([
                 'is_active' => true,
                 'activated_at' => now(),
                 'expires_at' => now()->addYear(),
             ]);
+            // Send notification safely
+            try {
+                if ($client->fcm_token) {
+                    FireBase::send(
+                        'تم تفعيل حسابك ✔️',
+                        'تم تفعيل حسابك الآن.',
+                        [$client->fcm_token],
+                        ['customKey' => 'customValue']
+                    );
+                }
+            } catch (\Exception $e) {
+                // لو الخطأ بسبب Token invalid → امسحه
+                if (str_contains($e->getMessage(), 'not a valid FCM registration token')) {
+                    $client->update(['fcm_token' => null]);
+                }
+                // متوقفش العملية
+            }
             $status = 'تم تفعيل الحساب بنجاح ✅';
         }
+
+
 
         return redirect()->back()->with('success', $status);
     }

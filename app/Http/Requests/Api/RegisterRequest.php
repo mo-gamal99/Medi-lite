@@ -31,6 +31,8 @@ class RegisterRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'phone_number' => ['required', 'string', 'unique:users,phone_number'],
             'device_id' => ['required'],
+            'verification_document' => 'required|file|mimes:jpg,jpeg,png|max:3120',
+
         ];
     }
 

@@ -10,15 +10,14 @@ trait Helper
 {
     public function uploadedImage($request, $fileName, $dirName)
     {
-        // if request hasn't it will make this method return null and if not it will return the path
         if (!$request->hasFile($fileName)) {
-            return;
+            return null;
         }
 
         $file = $request->file($fileName); // return uploadedFile object
         $path = $file->store('uploads/' . $dirName, [
             'disk' => 'public'
-        ]); // or i can put key and value ('disk' => 'public')
+        ]);
         return $path;
     }
 

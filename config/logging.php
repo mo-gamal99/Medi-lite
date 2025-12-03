@@ -117,6 +117,12 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        'firebase' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/firebase.log'),
+            'level' => 'debug',
+        ],
     ],
 
 ];

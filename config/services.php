@@ -35,4 +35,9 @@ return [
         'secret' => env('MOYASAR_SECRET', config('services.moyasar.secret')),
     ],
 
+    'firebase' => [
+        'credentials' => base_path(env('FIREBASE_CREDENTIALS')),
+        'project_id' => env('FIREBASE_PROJECT_ID'),
+    ],
+
 ];

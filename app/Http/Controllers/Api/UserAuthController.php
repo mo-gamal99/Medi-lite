@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Api;
 
 use App\Helper\ApiResponse;
+use App\Helper\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\RegisterRequest;
 use App\Models\User;
+use App\Services\Notifications\FireBase;
 use Illuminate\Http\Request;
 
 class UserAuthController extends Controller
 {
+    use Helper;
 
     public function register(RegisterRequest $request)
     {
@@ -18,7 +21,14 @@ class UserAuthController extends Controller
             'phone_number' => $request->phone_number,
             'ip_address' => $request->ip_address ?? $request->ip(),
             'device_id' => $request->device_id,
+            'fcm_token' => $request->fcm_token,
             'is_active' => false,
+        ]);
+
+        $path = $this->uploadedImage($request, 'verification_document', 'user_documents');
+
+        $user->update([
+            'verification_document' => $path,
         ]);
 
         return ApiResponse::sendResponse(200, 'تم تسجيل بياناتك بنجاح، في انتظار تفعيل الحساب.', [
@@ -65,4 +75,14 @@ class UserAuthController extends Controller
         ]);
     }
 
+    public function fire_notification(Request $request)
+    {
+        FireBase::send(
+            'Hello User!',
+            'This is your Firebase push notification.',
+            ['user-fcm-token-here'],
+            ['customKey' => 'customValue']
+        );
+
+    }
 }
